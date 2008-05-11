@@ -1,0 +1,340 @@
+info
+	name "quicy"
+	description "Quicy"
+	version "0.1"
+
+targets
+	application quicy
+		sources
+			src/main.d
+			
+			src/ui/window.d
+			
+			src/quicy/all.d
+			src/quicy/board.d
+			src/quicy/rendering.d
+			
+			src/icygl/all.d
+			src/icygl/texture.d
+			src/icygl/util.d
+			src/icygl/simple.d
+			
+			src/derelict/DerelictUtil/derelict/util/exception.d
+			src/derelict/DerelictUtil/derelict/util/loader.d
+			src/derelict/DerelictUtil/derelict/util/wintypes.d
+			src/derelict/DerelictUtil/derelict/util/wrapper.d
+			
+			src/derelict/DerelictSDLImage/derelict/sdl/image.d
+			
+			src/derelict/DerelictSDL/derelict/sdl/active.d
+			src/derelict/DerelictSDL/derelict/sdl/audio.d
+			src/derelict/DerelictSDL/derelict/sdl/byteorder.d
+			src/derelict/DerelictSDL/derelict/sdl/cdrom.d
+			src/derelict/DerelictSDL/derelict/sdl/cpuinfo.d
+			src/derelict/DerelictSDL/derelict/sdl/endian.d
+			src/derelict/DerelictSDL/derelict/sdl/error.d
+			src/derelict/DerelictSDL/derelict/sdl/events.d
+			src/derelict/DerelictSDL/derelict/sdl/joystick.d
+			src/derelict/DerelictSDL/derelict/sdl/keyboard.d
+			src/derelict/DerelictSDL/derelict/sdl/keysym.d
+			src/derelict/DerelictSDL/derelict/sdl/loadso.d
+			src/derelict/DerelictSDL/derelict/sdl/mouse.d
+			src/derelict/DerelictSDL/derelict/sdl/mutex.d
+			src/derelict/DerelictSDL/derelict/sdl/rwops.d
+			src/derelict/DerelictSDL/derelict/sdl/sdl.d
+			src/derelict/DerelictSDL/derelict/sdl/sdlversion.d
+			src/derelict/DerelictSDL/derelict/sdl/syswm.d
+			src/derelict/DerelictSDL/derelict/sdl/thread.d
+			src/derelict/DerelictSDL/derelict/sdl/timer.d
+			src/derelict/DerelictSDL/derelict/sdl/types.d
+			src/derelict/DerelictSDL/derelict/sdl/video.d
+			
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/color_buffer_float.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/depth_texture.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/draw_buffers.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/fragment_program.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/fragment_program_shadow.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/fragment_shader.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/half_float_pixel.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/matrix_palette.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/multisample.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/multitexture.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/occlusion_query.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/pixel_buffer_object.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/point_parameters.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/point_sprite.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/shader_objects.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/shading_language_100.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/shadow.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/shadow_ambient.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/texture_border_clamp.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/texture_compression.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/texture_cube_map.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/texture_env_add.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/texture_env_combine.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/texture_env_crossbar.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/texture_env_dot3.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/texture_float.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/texture_mirrored_repeat.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/texture_non_power_of_two.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/texture_rectangle.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/transpose_matrix.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/vertex_blend.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/vertex_buffer_object.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/vertex_program.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/vertex_shader.d
+			src/derelict/DerelictGL/derelict/opengl/extension/arb/window_pos.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/draw_buffers.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/element_array.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/envmap_bumpmap.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/fragment_shader.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/map_object_buffer.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/pn_triangles.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/separate_stencil.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/shader_texture_lod.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/text_fragment_shader.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/texture_compression_3dc.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/texture_env_combine3.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/texture_float.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/texture_mirror_once.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/vertex_array_object.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/vertex_attrib_array_object.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ati/vertex_streams.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/abgr.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/bgra.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/blend_color.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/blend_equation_separate.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/blend_func_separate.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/blend_minmax.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/blend_subtract.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/Cg_shader.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/clip_volume_hint.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/cmyka.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/color_subtable.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/compiled_vertex_array.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/convolution.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/coordinate_frame.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/cull_vertex.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/depth_bounds_test.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/draw_buffers2.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/draw_instanced.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/draw_range_elements.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/fog_coord.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/four22_pixels.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/fragment_lighting.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/framebuffer_blit.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/framebuffer_multisample.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/framebuffer_object.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/framebuffer_sRGB.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/geometry_shader4.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/gpu_program_parameters.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/gpu_shader4.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/histogram.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/light_texture.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/misc_attribute.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/multi_draw_arrays.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/multisample.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/packed_depth_stencil.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/packed_float.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/packed_pixels.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/paletted_texture.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/pixel_buffer_object.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/pixel_transform.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/pixel_transform_color_table.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/point_parameters.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/rescale_normal.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/scene_marker.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/secondary_color.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/separate_specular_color.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/shadow_funcs.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/shared_texture_palette.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/stencil_clear_tag.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/stencil_two_side.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/stencil_wrap.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture3D.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_array.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_buffer_object.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_compression_dxt1.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_compression_latc.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_compression_rgtc.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_compression_s3tc.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_cube_map.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_edge_clamp.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_env_add.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_env_combine.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_env_dot3.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_filter_anisotropic.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_integer.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_lod_bias.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_mirror_clamp.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_perturb_normal.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_rectangle.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/texture_sRGB.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/timer_query.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/vertex_shader.d
+			src/derelict/DerelictGL/derelict/opengl/extension/ext/vertex_weighting.d
+			src/derelict/DerelictGL/derelict/opengl/extension/hp/convolution_border_modes.d
+			src/derelict/DerelictGL/derelict/opengl/extension/loader.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/blend_square.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/copy_depth_to_color.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/depth_buffer_float.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/depth_clamp.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/evaluators.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/fence.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/float_buffer.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/fog_distance.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/fragment_program.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/fragment_program2.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/fragment_program4.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/fragment_program_option.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/framebuffer_multisample_coverage.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/geometry_program4.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/geometry_shader4.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/gpu_program4.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/half_float.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/light_max_exponent.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/multisample_filter_hint.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/occlusion_query.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/packed_depth_stencil.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/parameter_buffer_object.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/pixel_data_range.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/point_sprite.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/primitive_restart.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/register_combiners.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/register_combiners2.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/texgen_emboss.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/texgen_reflection.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/texture_compression_vtc.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/texture_env_combine4.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/texture_expand_normal.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/texture_rectangle.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/texture_shader.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/texture_shader2.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/texture_shader3.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/transform_feedback.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/vertex_array_range.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/vertex_array_range2.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/vertex_program.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/vertex_program1_1.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/vertex_program2.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/vertex_program2_option.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/vertex_program3.d
+			src/derelict/DerelictGL/derelict/opengl/extension/nv/vertex_program4.d
+			src/derelict/DerelictGL/derelict/opengl/extension/sgi/color_matrix.d
+			src/derelict/DerelictGL/derelict/opengl/extension/sgis/generate_mipmap.d
+			src/derelict/DerelictGL/derelict/opengl/gl.d
+			src/derelict/DerelictGL/derelict/opengl/gl12.d
+			src/derelict/DerelictGL/derelict/opengl/gl13.d
+			src/derelict/DerelictGL/derelict/opengl/gl14.d
+			src/derelict/DerelictGL/derelict/opengl/gl15.d
+			src/derelict/DerelictGL/derelict/opengl/gl20.d
+			src/derelict/DerelictGL/derelict/opengl/gl21.d
+			src/derelict/DerelictGL/derelict/opengl/glext.d
+			src/derelict/DerelictGL/derelict/opengl/glfuncs.d
+			src/derelict/DerelictGL/derelict/opengl/gltypes.d
+			src/derelict/DerelictGL/derelict/opengl/glx.d
+			src/derelict/DerelictGL/derelict/opengl/wgl.d
+			
+			src/derelict/DerelictGLU/derelict/opengl/glu.d
+			
+			src/derelict/DerelictAL/derelict/openal/al.d
+			src/derelict/DerelictAL/derelict/openal/alctypes.d
+			src/derelict/DerelictAL/derelict/openal/alfuncs.d
+			src/derelict/DerelictAL/derelict/openal/altypes.d
+			
+			./src/cairo/cairo/cairo.d
+			./src/cairo/cairo/cairofuncs.d
+			./src/cairo/cairo/cairotypes.d
+			./src/cairo/cairo/glitz/cairo_glitz.d
+			./src/cairo/cairo/glitz/cairofuncs_glitz.d
+			./src/cairo/cairo/glitz/cairotypes_glitz.d
+			./src/cairo/cairo/loader.d
+			./src/cairo/cairo/pdf/cairo_pdf.d
+			./src/cairo/cairo/pdf/cairofuncs_pdf.d
+			./src/cairo/cairo/pdf/cairotypes_pdf.d
+			./src/cairo/cairo/png/cairo_png.d
+			./src/cairo/cairo/png/cairofuncs_png.d
+			./src/cairo/cairo/png/cairotypes_png.d
+			./src/cairo/cairo/ps/cairo_ps.d
+			./src/cairo/cairo/ps/cairofuncs_ps.d
+			./src/cairo/cairo/ps/cairotypes_ps.d
+			./src/cairo/cairo/svg/cairo_svg.d
+			./src/cairo/cairo/svg/cairofuncs_svg.d
+			./src/cairo/cairo/svg/cairotypes_svg.d
+			./src/cairo/cairooo/all.d
+			./src/cairo/cairooo/cairo.d
+			./src/cairo/cairooo/callbacks.d
+			./src/cairo/cairooo/context.d
+			./src/cairo/cairooo/enums.d
+			./src/cairo/cairooo/exceptions.d
+			./src/cairo/cairooo/extra/all.d
+			./src/cairo/cairooo/extra/shapetemplate.d
+			./src/cairo/cairooo/extra/types.d
+			./src/cairo/cairooo/fontextents.d
+			./src/cairo/cairooo/fontface.d
+			./src/cairo/cairooo/fontoptions.d
+			./src/cairo/cairooo/glitz/all.d
+			./src/cairo/cairooo/glitz/glitz.d
+			./src/cairo/cairooo/glitz/glitzsurface.d
+			./src/cairo/cairooo/glyph.d
+			./src/cairo/cairooo/gradient.d
+			./src/cairo/cairooo/imagebuffersurface.d
+			./src/cairo/cairooo/imagesurface.d
+			./src/cairo/cairooo/lineargradient.d
+			./src/cairo/cairooo/matrix.d
+			./src/cairo/cairooo/path.d
+			./src/cairo/cairooo/pattern.d
+			./src/cairo/cairooo/png/all.d
+			./src/cairo/cairooo/png/png.d
+			./src/cairo/cairooo/png/pngsurface.d
+			./src/cairo/cairooo/radialgradient.d
+			./src/cairo/cairooo/scaledfont.d
+			./src/cairo/cairooo/solidpattern.d
+			./src/cairo/cairooo/surface.d
+			./src/cairo/cairooo/surfacepattern.d
+			./src/cairo/cairooo/textextents.d
+			
+			platform darwin
+				src/SDL_mac_prefix.m
+		includes
+			none
+	
+
+contains
+	none
+
+options
+	none
+
+depends
+	platform win32
+		none
+	platform darwin
+		none
+	platform posix
+		none
+	platform all
+		none
+
+flags
+	platform darwin
+		library "iconv"
+	
+	cflags "-g"
+	
+	include "src/"
+	platform darwin
+		include "/usr/local/include/ffmpeg"
+		ldflags "-L/usr/local/lib -framework Cocoa -framework AGL"
+	platform posix
+		include "/usr/include/ffmpeg"
+	include "src/derelict/DerelictSDL/"
+	include "src/derelict/DerelictSDLImage/"
+	include "src/derelict/DerelictUtil/"
+	include "src/derelict/DerelictGL/"
+	include "src/derelict/DerelictGLU/"
+	include "src/derelict/DerelictAL/"
+	include "src/cairo/"
+	cflags "-fversion=cairo_1_4"
+	cflags "-funittest"
+	
