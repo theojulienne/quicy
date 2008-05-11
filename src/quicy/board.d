@@ -140,6 +140,9 @@ class Shape {
 	}
 	
 	void rotate( bool clockwise=false ) {
+		if ( type == Type.O )
+			return;
+		
 		foreach ( block; blocks ) {
 			int tmpx = block._x;
 			int tmpy = block._y;
@@ -235,6 +238,8 @@ class Board {
 		if ( shapeCollides( currentPiece ) ) {
 			// undo
 			currentPiece.rotate( !clockwise );
+		} else {
+			resetDropFinishTimeout( );
 		}
 	}
 	
@@ -246,7 +251,22 @@ class Board {
 		if ( shapeCollides( currentPiece ) ) {
 			// undo
 			currentPiece.x -= adder;
+		} else {
+			resetDropFinishTimeout( );
 		}
+	}
+	
+	d_time dropFinishTimeout;
+	bool dropTimeout = false;
+	
+	void setDropFinishTimeout( ) {
+		dropTimeout = true;
+		resetDropFinishTimeout( );
+	}
+	
+	void resetDropFinishTimeout( ) {
+		if ( dropTimeout )
+			dropFinishTimeout = getUTCtime + cast(long)(TicksPerSecond * levelPauseTime * 0.5);
 	}
 	
 	bool lowerCurrentPiece( bool hardDrop=false, int hardDropCounter=0 ) {
@@ -258,10 +278,17 @@ class Board {
 			
 			// start counter etc here
 			// for now, just play the piece
-			commitCurrentPiece( hardDrop, hardDropCounter );
-			randomCurrentPiece( );
+			if ( hardDrop || (dropTimeout && dropFinishTimeout < getUTCtime) ) {
+				commitCurrentPiece( hardDrop, hardDropCounter );
+				randomCurrentPiece( );
+				dropTimeout = false;
+			} else {
+				setDropFinishTimeout( );
+			}
 			
 			return false;
+		} else {
+			dropTimeout = false;
 		}
 		
 		return true;
@@ -339,6 +366,10 @@ class Board {
 			blocks[to][x] = blocks[from][x];
 		}
 	}
+	
+	double levelPauseTime( ) {
+		return 1.0 - (level * 0.01);
+	}
 }
 
 class QuicyGame {
@@ -384,7 +415,7 @@ class QuicyGame {
 		
 		double piecePause = 1;
 		
-		piecePause = 1 - (board.level * 0.01);
+		piecePause = board.levelPauseTime;
 		
 		if ( piecePause < 0.1 )
 			piecePause = 0.1;
