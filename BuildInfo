@@ -328,6 +328,7 @@ flags
 		ldflags "-L/usr/local/lib -framework Cocoa -framework AGL"
 	platform posix
 		include "/usr/include/ffmpeg"
+		ldflags "-ldl"
 	include "src/derelict/DerelictSDL/"
 	include "src/derelict/DerelictSDLImage/"
 	include "src/derelict/DerelictUtil/"

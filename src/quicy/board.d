@@ -377,30 +377,34 @@ class QuicyGame {
 	Board board;
 	d_time last_render_time;
 	double time_counter = 0;
-	
+	float rot1 = 0;
+	float rot2 = 0;
+	float rot3 = 0;
+	float dir = -1;
 	Texture[7] colors;
 	
 	static const int blockSize = 24;
+	static const int blockTextureSize = 32;
 	static const int blockSpacing = blockSize + (blockSize / 8);
 	
 	this( ) {
 		last_render_time = getUTCtime;
 		time_counter = 0;
 		
-		background_block = Rendering.createBlockImage( Color.create( 0.05, 0.05, 0.05 ), blockSize, blockSize );
+		background_block = Rendering.createBlockImage( Color.create( 0.05, 0.05, 0.05 ), blockTextureSize, blockTextureSize );
 		board = new Board;
 		
 		rand_seed( cast(int)last_render_time, 0 );
 		
 		//board.currentPiece.x = 5;
 		
-		colors[0] = Rendering.createBlockImage( Color.create( 0, 1, 1 ), blockSize, blockSize );
-		colors[1] = Rendering.createBlockImage( Color.create( 0, 0, 1 ), blockSize, blockSize );
-		colors[2] = Rendering.createBlockImage( Color.create( 1, 0.5, 0 ), blockSize, blockSize );
-		colors[3] = Rendering.createBlockImage( Color.create( 1, 1, 0 ), blockSize, blockSize );
-		colors[4] = Rendering.createBlockImage( Color.create( 0, 1, 0 ), blockSize, blockSize );
-		colors[5] = Rendering.createBlockImage( Color.create( 0.5, 0, 1 ), blockSize, blockSize );
-		colors[6] = Rendering.createBlockImage( Color.create( 1, 0, 0 ), blockSize, blockSize );
+		colors[0] = Rendering.createBlockImage( Color.create( 0, 1, 1 ), blockTextureSize, blockTextureSize );
+		colors[1] = Rendering.createBlockImage( Color.create( 0, 0, 1 ), blockTextureSize, blockTextureSize );
+		colors[2] = Rendering.createBlockImage( Color.create( 1, 0.5, 0 ), blockTextureSize, blockTextureSize );
+		colors[3] = Rendering.createBlockImage( Color.create( 1, 1, 0 ), blockTextureSize, blockTextureSize );
+		colors[4] = Rendering.createBlockImage( Color.create( 0, 1, 0 ), blockTextureSize, blockTextureSize );
+		colors[5] = Rendering.createBlockImage( Color.create( 0.5, 0, 1 ), blockTextureSize, blockTextureSize );
+		colors[6] = Rendering.createBlockImage( Color.create( 1, 0, 0 ), blockTextureSize, blockTextureSize );
 	}
 	
 	bool paused = false;
@@ -426,10 +430,22 @@ class QuicyGame {
 			board.lowerCurrentPiece( );
 		}
 		
-		w.ortho = true;
+		//w.ortho = true;
+		
+		static double scaling = 0.07;
 		
 		glLoadIdentity( );
-		glTranslatef( 50, 50, 0 );
+		glTranslatef( 0, 0, -50 + sin(rot1)*10 );
+		glTranslatef( -10, 15, 0 );
+		glRotatef( sin(rot1)*45.0f , 1, 0, 0 );
+		glRotatef( sin(rot2)*360.0f , 0, 1, 0 );
+		glRotatef( sin(rot3)*45.0f , 0, 0, 1 );
+		rot1 += 0.01;
+		rot2 += 0.03;
+		rot3 += 0.02;
+		glScalef( scaling, -scaling, scaling );
+		//glTranslatef( 50, 50 );
+		
 		glColor4f( 1, 1, 1, 1 );
 		
 		void drawBlock( Texture t, int x, int y ) {
@@ -458,7 +474,7 @@ class QuicyGame {
 			drawBlock( colors[shape.type], block.x, block.y );
 		}
 		
-		w.ortho = false;
+		//w.ortho = false;
 	}
 	
 	void event( SDL_Event e ) {
@@ -479,6 +495,10 @@ class QuicyGame {
 				
 				break;
 			case SDLK_DOWN:
+				board.lowerCurrentPiece( true );
+				
+				break;
+			case SDLK_SPACE:
 				int hardDropCounter = 1;
 				while ( board.lowerCurrentPiece( true, hardDropCounter ) ) {
 					hardDropCounter++;
