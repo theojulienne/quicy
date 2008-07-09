@@ -386,16 +386,20 @@ class QuicyGame {
 	float rot3 = 0;
 	float dir = -1;
 	Texture[7] colors;
+	Texture[7] bgcolors;
 	
 	static const int blockSize = 24;
 	static const int blockTextureSize = 32;
 	static const int blockSpacing = blockSize + (blockSize / 8);
 	
+	
+	float light_y;
+	
 	this( ) {
 		last_render_time = getUTCtime;
 		time_counter = 0;
 		
-		background_block = Rendering.createBlockImage( Color.create( 0.05, 0.05, 0.05 ), blockTextureSize, blockTextureSize );
+		background_block = Rendering.createBlockImage( Color.create( 0.05, 0.05, 0.05 ), blockTextureSize, blockTextureSize, 1 );
 		board = new Board;
 		
 		rand_seed( cast(int)last_render_time, 0 );
@@ -409,6 +413,30 @@ class QuicyGame {
 		colors[4] = Rendering.createBlockImage( Color.create( 0, 1, 0 ), blockTextureSize, blockTextureSize );
 		colors[5] = Rendering.createBlockImage( Color.create( 0.5, 0, 1 ), blockTextureSize, blockTextureSize );
 		colors[6] = Rendering.createBlockImage( Color.create( 1, 0, 0 ), blockTextureSize, blockTextureSize );
+		
+		bgcolors[0] = Rendering.createBlockImage( Color.create( 0, 1, 1 ), blockTextureSize, blockTextureSize, 1 );
+		bgcolors[1] = Rendering.createBlockImage( Color.create( 0, 0, 1 ), blockTextureSize, blockTextureSize, 1 );
+		bgcolors[2] = Rendering.createBlockImage( Color.create( 1, 0.5, 0 ), blockTextureSize, blockTextureSize, 1 );
+		bgcolors[3] = Rendering.createBlockImage( Color.create( 1, 1, 0 ), blockTextureSize, blockTextureSize, 1 );
+		bgcolors[4] = Rendering.createBlockImage( Color.create( 0, 1, 0 ), blockTextureSize, blockTextureSize, 1 );
+		bgcolors[5] = Rendering.createBlockImage( Color.create( 0.5, 0, 1 ), blockTextureSize, blockTextureSize, 1 );
+		bgcolors[6] = Rendering.createBlockImage( Color.create( 1, 0, 0 ), blockTextureSize, blockTextureSize, 1 );
+		
+		glShadeModel( GL_SMOOTH );
+		glEnable (GL_LINE_SMOOTH);
+	   	glEnable (GL_BLEND);
+	   	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	   	glHint (GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
+	   	glLineWidth (1.5);
+	    glEnable (GL_POLYGON_SMOOTH);
+
+			
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+		
+		light_y = 0;
+		
+		
 	}
 	
 	bool paused = false;
@@ -437,19 +465,31 @@ class QuicyGame {
 		//w.ortho = true;
 		
 		static double scaling = 0.07;
-		glEnable (GL_LINE_SMOOTH);
-	   	glEnable (GL_BLEND);
-	   	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	   	glHint (GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
-	   	glLineWidth (1.5);
-	    glEnable (GL_POLYGON_SMOOTH);
+
+
 	
+
+
+		// Create light components
+		GLfloat ambientLight[] = [ 0.2f, 0.2f, 0.2f, 1.0f ];
+		GLfloat diffuseLight[] = [ 0.8f, 0.8f, 0.8, 1.0f ];
+		GLfloat specularLight[] = [ 0.5f, 0.5f, 0.5f, 1.0f ];
+		GLfloat position[] = [ -5.0f, 10.0f, 0.0f, 1.0f ];
+
+		// Assign created components to GL_LIGHT0
+		glLightfv(GL_LIGHT0, GL_AMBIENT, cast(GLfloat*) ambientLight);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, cast(GLfloat*) diffuseLight);
+		glLightfv(GL_LIGHT0, GL_SPECULAR, cast(GLfloat*) specularLight);
+		glLightfv(GL_LIGHT0, GL_POSITION, cast(GLfloat*) position);
+		
+		
+		 
 	
 		glLoadIdentity( );
 		glTranslatef( 0, 0, -50);
 		glTranslatef( -10, 20, 0 );
-		glRotatef( -20.0f , 1, 0, 0 );
-		glRotatef( 20.0f , 0, 1, 0 );
+		glRotatef( -40.0f , 1, 0, 0 );
+		glRotatef( 0.0f , 0, 1, 0 );
  	//	glRotatef( sin(rot3)*45.0f , 0, 0, 1 );
 		rot1 += 0.0001;
 		rot2 += 0.0003;
@@ -465,23 +505,47 @@ class QuicyGame {
 			glPushMatrix( );
 			glTranslatef( x*blockSpacing, y*blockSpacing, 0 );
 			//drawTexturedQuad( blockSize, blockSize, t );
-			drawTexturedCube( blockSize/2.0, t, 0.5 );
+			drawTexturedCube( blockSize/2.0, t, 1.0 );
+			glPopMatrix( );
+		}
+		
+		void drawBGBlock( Texture t, int x, int y, float alpha) {
+			t.activate( GL_TEXTURE0, 0 );
+			
+			glPushMatrix( );
+			glTranslatef( x*blockSpacing, y*blockSpacing, -blockSize );
+			//drawTexturedQuad( blockSize, blockSize, t );
+			drawTexturedCube( blockSize/2.0, t, alpha );
 			glPopMatrix( );
 		}
 		
 		// draw background
 		
+		
+		Shape shape = board.currentPiece;
+		
 		foreach ( y, row; board.blocks ) {
 			foreach ( x, block; row ) {
+			
+				
 				if ( block is null ) {
-					//drawBlock( background_block, x, y );
+					drawBGBlock( background_block, x, y, 0.0 );
 				} else {
+					drawBGBlock( background_block, x, y, 0.0 );
 					drawBlock( colors[block.color], x, y );
 				}
+				
+				foreach ( pieceblock; shape.blocks ) {
+					drawBGBlock( bgcolors[shape.type], pieceblock.x, y, 0.5 );
+					//drawBGBlock( colors[shape.type], pieceblock.x, cast(int)light_y, 0.5 );
+				}
+				
 			}
 		}
 		
-		Shape shape = board.currentPiece;
+		if ( cast(int)light_y >= board.blocks.length ) light_y = 0;
+		light_y = light_y + 0.05;
+		
 		foreach ( block; shape.blocks ) {
 			drawBlock( colors[shape.type], block.x, block.y );
 		}

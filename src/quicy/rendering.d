@@ -32,7 +32,7 @@ class Rendering
 		Context context;
 		Texture texture;
 		
-		void redraw( Color c, float mask_r )
+		void redraw( Color c, float mask_r, int type )
 		{
 			auto acr = context;
 			
@@ -41,7 +41,11 @@ class Rendering
 			acr.scale( surface.width, surface.height );
 
 			acr.rectangle(0, 0, 1, 1);
-		    acr.setSourceRGBA(0, 0, 0, 1);
+			if ( type == 1 ) {
+		    	acr.setSourceRGBA(0, 0, 0, 0.25);
+			} else {
+				acr.setSourceRGBA(1.0, 1.0, 1.0, 0.5);
+			}
 		    //acr.operator = Operator.Clear;
 		    acr.fill();
 
@@ -65,14 +69,28 @@ class Rendering
 			}
 
 			acr.lineWidth = 5;
-		    acr.setSourceRGBA(c.r, c.g, c.b, 1);
+			
+			if ( type == 1 ) {
+		    	acr.setSourceRGBA(c.r, c.g, c.b, 0.25);
+			} else {
+				acr.setSourceRGBA(c.r, c.g, c.b, 0.8);
+			}
 		 	acr.operator = Operator.Over;
 		    //acr.arc(0.5, 0.5, 0.4, 0, 2*PI);
-			//drawRoundedRect( acr, 0, 0, surface.width, surface.height, surface.width / 10.0 * mask_r );
-		    acr.rectangle(0, 0, surface.width, surface.height);
 			
-		
+			acr.rectangle(0, 0, surface.width, surface.height);
+			
 			acr.fill();
+			
+			if ( type == 1 ) {
+				acr.setSourceRGBA(c.r, c.g, c.b, 0.5);
+				drawRoundedRect( acr, 5, 5, surface.width-10, surface.height-10, surface.width / 10.0 * mask_r );
+				acr.fill();
+			} else {
+				acr.setSourceRGBA(c.r, c.g, c.b, 0.5);
+				drawRoundedRect( acr, 5, 5, surface.width-10, surface.height-10, surface.width / 10.0 * mask_r );
+				acr.fill();
+			}
 
 			texture.updateData( 0, GL_RGBA, GL_BGRA, GL_UNSIGNED_BYTE, surface.width, surface.height, surface.data.ptr, 0 );
 		}
@@ -80,18 +98,18 @@ class Rendering
 	
 	static BlockImage[Color] blockImages;
 	
-	static Texture createBlockImage( Color c, int width=16, int height=16 )
+	static Texture createBlockImage( Color c, int width=16, int height=16, int type=0 )
 	{
 		BlockImage im;
 		
-		if ( c in blockImages )
-			return blockImages[c].texture;
+		//if ( c in blockImages )
+		//	return blockImages[c].texture;
 		
 		im.surface = new ImageBufferSurface(Format.ARGB32, width, height);
 	    im.context = new Context(im.surface);
 		im.texture = new ImageTexture( );
 		
-		im.redraw( c, 5 );
+		im.redraw( c, 5, type );
 		
 		blockImages[c] = im;
 		
