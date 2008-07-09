@@ -68,8 +68,11 @@ class Rendering
 		    acr.setSourceRGBA(c.r, c.g, c.b, 1);
 		 	acr.operator = Operator.Over;
 		    //acr.arc(0.5, 0.5, 0.4, 0, 2*PI);
-			drawRoundedRect( acr, 0, 0, surface.width, surface.height, surface.width / 10.0 * mask_r );
-		    acr.fill();
+			//drawRoundedRect( acr, 0, 0, surface.width, surface.height, surface.width / 10.0 * mask_r );
+		    acr.rectangle(0, 0, surface.width, surface.height);
+			
+		
+			acr.fill();
 
 			texture.updateData( 0, GL_RGBA, GL_BGRA, GL_UNSIGNED_BYTE, surface.width, surface.height, surface.data.ptr, 0 );
 		}

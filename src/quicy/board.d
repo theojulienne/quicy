@@ -437,12 +437,19 @@ class QuicyGame {
 		//w.ortho = true;
 		
 		static double scaling = 0.07;
-		
+		glEnable (GL_LINE_SMOOTH);
+	   	glEnable (GL_BLEND);
+	   	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	   	glHint (GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
+	   	glLineWidth (1.5);
+	    glEnable (GL_POLYGON_SMOOTH);
+	
+	
 		glLoadIdentity( );
 		glTranslatef( 0, 0, -50);
-		glTranslatef( -10, 15, 0 );
-	//	glRotatef( sin(rot1)*45.0f , 1, 0, 0 );
-	//	glRotatef( sin(rot2)*360.0f , 0, 1, 0 );
+		glTranslatef( -10, 20, 0 );
+		glRotatef( -20.0f , 1, 0, 0 );
+		glRotatef( 20.0f , 0, 1, 0 );
  	//	glRotatef( sin(rot3)*45.0f , 0, 0, 1 );
 		rot1 += 0.0001;
 		rot2 += 0.0003;
@@ -450,14 +457,15 @@ class QuicyGame {
 		glScalef( scaling, -scaling, scaling );
 		//glTranslatef( 50, 50 );
 		
-		glColor4f( 1, 1, 1, 1 );
+		glColor4f( 0, 0, 0, 0 );
 		
 		void drawBlock( Texture t, int x, int y ) {
 			t.activate( GL_TEXTURE0, 0 );
 			
 			glPushMatrix( );
 			glTranslatef( x*blockSpacing, y*blockSpacing, 0 );
-			drawTexturedQuad( blockSize, blockSize, t );
+			//drawTexturedQuad( blockSize, blockSize, t );
+			drawTexturedCube( blockSize/2.0, t, 0.5 );
 			glPopMatrix( );
 		}
 		
@@ -465,9 +473,9 @@ class QuicyGame {
 		
 		foreach ( y, row; board.blocks ) {
 			foreach ( x, block; row ) {
-				if ( block is null )
-					drawBlock( background_block, x, y );
-				else {
+				if ( block is null ) {
+					//drawBlock( background_block, x, y );
+				} else {
 					drawBlock( colors[block.color], x, y );
 				}
 			}
