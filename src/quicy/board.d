@@ -486,14 +486,15 @@ class QuicyGame {
 		 
 	
 		glLoadIdentity( );
-		glTranslatef( 0, 0, -50);
-		glTranslatef( -10, 20, 0 );
-		glRotatef( -40.0f , 1, 0, 0 );
-		glRotatef( 0.0f , 0, 1, 0 );
- 	//	glRotatef( sin(rot3)*45.0f , 0, 0, 1 );
+		//writefln("%s\n", sin(rot3) );
+		glTranslatef( 0, 16, -50 - sin(rot3)*5 );
+		glTranslatef( -10, 0, 0 );
+		glRotatef( -90.0f , 1, 0, 0 );
+ 		glRotatef( 20 + sin(rot3)*25.0f , 0, 0, 1 );
+		glRotatef( sin(rot2)*40 + 60, 1, 0, 0 );
 		rot1 += 0.0001;
 		rot2 += 0.0003;
-		rot3 += 0.0002;
+		rot3 += 0.002;
 		glScalef( scaling, -scaling, scaling );
 		//glTranslatef( 50, 50 );
 		
@@ -552,7 +553,7 @@ class QuicyGame {
 		
 		shape = board.waitingPiece;
 		foreach ( block; shape.blocks ) {
-			drawBlock( colors[shape.type], block.x + 12, block.y );
+			drawBlock( colors[shape.type], block.x, block.y - 3 );
 		}
 
 		
