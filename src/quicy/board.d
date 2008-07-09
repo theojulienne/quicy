@@ -174,6 +174,7 @@ class Board {
 	Block[10][20] blocks;
 	
 	Shape currentPiece;
+	Shape waitingPiece;
 	
 	int score;
 	int lines;
@@ -195,6 +196,7 @@ class Board {
 			}
 		}
 		
+		waitingPiece = new Shape( cast(Shape.Type) (rand() % (Shape.Type.max+1)) );
 		randomCurrentPiece( );
 		
 		score = 0;
@@ -329,9 +331,11 @@ class Board {
 	}
 	
 	void randomCurrentPiece( ) {
-		currentPiece = new Shape( cast(Shape.Type) (rand() % (Shape.Type.max+1)) );
+		currentPiece = waitingPiece;
 		currentPiece.x = 5;
 		currentPiece.y = 0;
+		
+		waitingPiece = new Shape( cast(Shape.Type) (rand() % (Shape.Type.max+1)) );
 	}
 	
 	int cleanCompleteLines( ) {
@@ -435,14 +439,14 @@ class QuicyGame {
 		static double scaling = 0.07;
 		
 		glLoadIdentity( );
-		glTranslatef( 0, 0, -50 + sin(rot1)*10 );
+		glTranslatef( 0, 0, -50);
 		glTranslatef( -10, 15, 0 );
-		glRotatef( sin(rot1)*45.0f , 1, 0, 0 );
-		glRotatef( sin(rot2)*360.0f , 0, 1, 0 );
-		glRotatef( sin(rot3)*45.0f , 0, 0, 1 );
-		rot1 += 0.01;
-		rot2 += 0.03;
-		rot3 += 0.02;
+	//	glRotatef( sin(rot1)*45.0f , 1, 0, 0 );
+	//	glRotatef( sin(rot2)*360.0f , 0, 1, 0 );
+ 	//	glRotatef( sin(rot3)*45.0f , 0, 0, 1 );
+		rot1 += 0.0001;
+		rot2 += 0.0003;
+		rot3 += 0.0002;
 		glScalef( scaling, -scaling, scaling );
 		//glTranslatef( 50, 50 );
 		
@@ -473,6 +477,12 @@ class QuicyGame {
 		foreach ( block; shape.blocks ) {
 			drawBlock( colors[shape.type], block.x, block.y );
 		}
+		
+		shape = board.waitingPiece;
+		foreach ( block; shape.blocks ) {
+			drawBlock( colors[shape.type], block.x + 12, block.y );
+		}
+
 		
 		//w.ortho = false;
 	}
